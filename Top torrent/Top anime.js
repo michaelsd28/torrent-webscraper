@@ -2,62 +2,75 @@ const express = require("express");
 const cheerio = require("cheerio");
 const router = express.Router();
 const top_anime_url = "https://nyaa.si/?s=seeders&o=desc";
-const got = require('got');
-
+const got = require("got");
+const cron = require("node-cron");
 const fs = require("fs");
 
 
-//       fs.writeFile("Top Movies.json", topMOVIESfile, (err) => {
-//         if (err) throw err;
-//       });
 
+cron.schedule("0 1 * * *", async () => {
+  const html = await got(top_anime_url);
+  const $ = cheerio.load(html.body);
 
+  /* title */
+  let top_Titles = [];
+  $(
+    "body > div > div.table-responsive > table > tbody > tr:nth-child(n) > td:nth-child(2) > a:nth-child(n)"
+  ).each((index, value) => {
+    let link = $(value).attr("title");
 
-router.get("/",  async (req, res) => {
+    if (!link.includes("comment")) {
+      top_Titles.push(link);
+    }
+  });
 
-    const html = await got(top_anime_url);
-    const $ = cheerio.load(html.body);
+  console.log(top_Titles, "top_Titles");
 
+  /* top_magnet */
+  let top_magnet = [];
+  $("tbody a").each((index, value) => {
+    let link_m = $(value).attr("href");
 
-      let top_Titles = [];
-      $("tbody a").each((index, value) => {
-        let link = $(value).text();
+    if (link_m.includes("magnet")) {
+      top_magnet.push(link_m);
+    }
+  });
 
-     if(link.includes(".mkv")){
+  let top_seeds = [];
+  $(
+    "body > div > div.table-responsive > table > tbody > tr:nth-child(n) > td:nth-child(6)"
+  ).each((index, value) => {
+    let link_s = $(value).text();
 
-        top_Titles.push(link);
+    top_seeds.push(link_s);
+  });
 
-     }
+  console.log(
+    top_Titles.length,
+    "top_Titles",
+    top_magnet.length,
+    "top_magnet",
+    top_seeds.length,
+    "top_seeds"
+  );
 
-      });
+  let JsonResponse = {
+    anime: top_Titles,
+    magnet: top_magnet,
+    seeds: top_seeds,
+  };
 
-      console.log(top_Titles,"top_Titles")
+  const topAnimeFile = JSON.stringify(JsonResponse);
 
-
-
-
-    
- 
-    
-
-
-    
-
-
-    //   fs.writeFile("Top Movies.json", topMOVIESfile, (err) => {
-    //     if (err) throw err;
-    //   });
-    // }
-
-
-
-
-  res.send("hi")
-
-
-
-
+  fs.writeFileSync(__dirname + "/z_Top anime.json", topAnimeFile, (err) => {
+    if (err) throw err;
+  });
 });
 
+router.get("/", async (req, res) => {
+  res.sendFile(__dirname + "/z_Top anime.json");
+
+  console.log("sent file /z_Top anime.json");
+});
 
 module.exports = router;

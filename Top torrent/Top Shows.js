@@ -1,18 +1,23 @@
 const express = require("express");
 const cheerio = require("cheerio");
-const request = require("request");
 const router = express.Router();
 const top_shows_url = "https://thepiratebay10.org/top/205";
-const app = express();
+const got = require("got");
+const cron = require("node-cron");
 const fs = require("fs");
 
-router.get("/", (req, res) => {
 
-    
-  request(top_shows_url, function (error, response, html) {
-    const $ = cheerio.load(html);
 
-    if (!error && response.statusCode == 200) {
+
+cron.schedule("0 1 * * *", async () => {
+
+
+  const html = await got(top_shows_url);
+  const $ = cheerio.load(html.body);
+
+
+
+
       let top_Titles = [];
       $("tbody .detName a").each((index, value) => {
         let link = $(value).text();
@@ -64,13 +69,22 @@ router.get("/", (req, res) => {
 
       const topMOVIESfile = JSON.stringify(top_Movies_JSON);
 
-      fs.writeFileSync(__dirname+"/Top Shows.json", topMOVIESfile, (err) => {
+      fs.writeFileSync(__dirname+"/z_Top Shows.json", topMOVIESfile, (err) => {
         if (err) throw err;
       });
-    }
-  });
 
-  res.sendFile(__dirname + "/Top Shows.json");
+
+
+});
+
+
+router.get("/", (req, res) => {
+
+
+
+  res.sendFile(__dirname + "/z_Top Shows.json");
+
+  console.log("sent file /z_Top Shows.json");
 });
 
 module.exports = router;
