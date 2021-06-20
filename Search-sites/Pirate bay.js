@@ -39,7 +39,7 @@ router.get("/:id", async (req, res) => {
   });
 
   let top_Seeds = [];
-  $(`#searchResult > tbody > tr:nth-child(n) > td:nth-child(6)`).each(
+  $(`#searchResult > tbody > tr:nth-child(n) > td:nth-child(3)`).each(
     (index, value) => {
       let link_S = $(value).text();
       top_Seeds.push(link_S);
