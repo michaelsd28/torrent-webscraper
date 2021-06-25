@@ -14,6 +14,7 @@ const top_games = require("./Top torrent/Top  games");
 
 
 const pirate_search = require("./Search-sites/Pirate bay");
+const nyaa_search = require("./Search-sites/Nyaa search");
 
 
 app.use("/top-movies", top_movies);
@@ -22,10 +23,11 @@ app.use("/top-anime", top_anime);
 app.use("/top-games", top_games);
 
 app.use("/pirate-search", pirate_search);
+app.use("/nyaa-search", nyaa_search);
 
 
-app.get("/", (request, response) => {
-  response.send("Hello world !!!");
+app.get("/", (req, res) => {
+  res.sendFile(__dirname+"/page.html");
 });
 
 

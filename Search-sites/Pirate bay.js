@@ -10,7 +10,12 @@ const changeLink = require("./search link request")
 
 
 
+
+
+
 router.get("/:id", async (req, res) => {
+
+  try{
 
     const myParams = req.params.id;
     const search_pirate = changeLink.linkRequest( pirate_search+myParams)
@@ -22,12 +27,16 @@ router.get("/:id", async (req, res) => {
     /* search title */
 
 
+
     let top_Titles = [];
   $("#searchResult > tbody > tr:nth-child(n) > td:nth-child(2) > div > a").each((index, value) => {
     let link = $(value).text();
 
     top_Titles.push(link);
   });
+
+
+
 
 
   let top_Magnet = [];
@@ -64,6 +73,45 @@ router.get("/:id", async (req, res) => {
     }
   );
 
+  let storage = [];
+  let newString1 = []
+  $(`#searchResult > tbody > tr:nth-child(n) > td:nth-child(2) > font`).each(
+    (index, value) => {
+      let link_S = $(value).text();
+
+
+        
+        newString1.push(link_S.split(", ")) 
+
+
+      storage.push(link_S);
+    }
+  );
+
+
+
+
+let sizeONLY = [];
+
+const multiMAP = newString1.map((item) => {
+  item.map((newItem) => {
+    if (newItem.includes("Size")) {
+      sizeONLY.push(newItem);
+    }
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -72,7 +120,9 @@ router.get("/:id", async (req, res) => {
     magnet: top_Magnet,
     seeds: top_Seeds,
     type:top_type,
-    subtype: top_sub_type
+    subtype: top_sub_type,
+    size:sizeONLY,
+
   };
 
 
@@ -80,11 +130,19 @@ router.get("/:id", async (req, res) => {
 
 
     res.json(top_Movies_JSON);
+
+  }catch(error){
+
+    console.log(error)
+  
+  
+  }
   
 
   });
 
 
+  
 
 
 
