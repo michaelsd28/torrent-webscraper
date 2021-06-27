@@ -15,6 +15,8 @@ const top_games = require("./Top torrent/Top  games");
 
 const pirate_search = require("./Search-sites/Pirate bay");
 const nyaa_search = require("./Search-sites/Nyaa search");
+const rarbg_search = require("./Search-sites/RARBG search");
+const X1337_search = require("./Search-sites/1337x Search");
 
 
 app.use("/top-movies", top_movies);
@@ -24,6 +26,8 @@ app.use("/top-games", top_games);
 
 app.use("/pirate-search", pirate_search);
 app.use("/nyaa-search", nyaa_search);
+app.use("/rarbg-search", rarbg_search);
+app.use("/1337x-search", X1337_search);
 
 
 app.get("/", (req, res) => {
