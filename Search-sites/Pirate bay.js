@@ -15,6 +15,8 @@ router.get("/:id", async (req, res) => {
     const html = await got(search_pirate);
     const $ = cheerio.load(html.body);
 
+    console.log(html.body)
+
     /* search title */
 
     let top_Titles = [];

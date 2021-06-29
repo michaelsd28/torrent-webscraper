@@ -19,6 +19,8 @@ router.get("/:id", async (req, res) => {
     const html = await got(search_pirate);
     const $ = cheerio.load(html.body);
 
+
+
     console.log(search_pirate, "search_pirate");
     /* search title */
 
@@ -104,10 +106,15 @@ router.get("/:id", async (req, res) => {
 
 router.get("/redirect/:torrentRedirect", async (req,res)=>{
 
+  try{
+
+
+ 
+
   let params = req.params.torrentRedirect
   let req_link = changeLink.slashREDIRECT(params,"^","/")
 
-  console.log(req_link)
+  console.log(req_link,"req_link")
 
   const html = await got(req_link);
   const $ = cheerio.load(html.body);
@@ -115,11 +122,21 @@ router.get("/redirect/:torrentRedirect", async (req,res)=>{
 
 
 
- let magnet =  $('body > main > div > div > div > div.l91eb93a224d6788435558f5e631b803dd4e97a19.no-top-radius > div.ld0ed383ae132415e9be24587bb5a4fa33aa57b64.clearfix > ul.l987dbb15efe52051c609a7466afc44d0055c55d8.l69983532c2b9af1f3bf98d277fc620d8e7dc30a0 > li:nth-child(1) > a').attr('href');
+
+
+let magnet =  $('.box-info li a').attr('href');
+
+
 
 
 
 res.status(301).redirect(magnet)
+
+
+
+}catch(error){
+
+}
 
 
 })
