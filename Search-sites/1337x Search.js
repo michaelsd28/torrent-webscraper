@@ -16,10 +16,9 @@ router.get("/:id", async (req, res) => {
     );
 
     const html = await got(search_pirate);
-
-    console.log(search_pirate, "search_pirate");
     const $ = cheerio.load(html.body);
 
+    console.log(search_pirate, "search_pirate");
     /* search title */
 
     let top_Titles = [];
@@ -31,13 +30,21 @@ router.get("/:id", async (req, res) => {
       top_Titles.push(link);
     });
 
+
+
     let top_Magnet = [];
     $(
       "body > main > div > div > div > div.box-info-detail.inner-table > div.table-list-wrap > table > tbody > tr:nth-child(n) > td.coll-1.name > a:nth-child(2)"
     ).each((index, value) => {
       let link_M = $(value).attr("href");
 
-      top_Magnet.push(X1337_pre_link + link_M);
+
+
+    
+
+    
+
+      top_Magnet.push( changeLink.slashFAKE( X1337_pre_link + link_M));
     });
 
     let top_Seeds = [];
@@ -83,8 +90,43 @@ router.get("/:id", async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-
-
 });
+
+
+
+
+
+
+
+
+
+
+router.get("/redirect/:torrentRedirect", async (req,res)=>{
+
+  let params = req.params.torrentRedirect
+  let req_link = changeLink.slashREDIRECT(params,"^","/")
+
+  console.log(req_link)
+
+  const html = await got(req_link);
+  const $ = cheerio.load(html.body);
+
+
+
+
+ let magnet =  $('body > main > div > div > div > div.l91eb93a224d6788435558f5e631b803dd4e97a19.no-top-radius > div.ld0ed383ae132415e9be24587bb5a4fa33aa57b64.clearfix > ul.l987dbb15efe52051c609a7466afc44d0055c55d8.l69983532c2b9af1f3bf98d277fc620d8e7dc30a0 > li:nth-child(1) > a').attr('href');
+
+
+
+res.status(301).redirect(magnet)
+
+
+})
+
+
+
+
+
+
 
 module.exports = router;

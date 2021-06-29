@@ -17,10 +17,21 @@ function linkRequestNyaa(item) {
   return newItem;
 }
 
+function slashFAKE(item) {
+  let newItem = item.replace(/\//g, "^");
+
+  return newItem;
+}
+
+function slashREDIRECT(string, search, replace) {
+  return string.split(search).join(replace);
+}
 
 
 
 module.exports = {
   linkRequest,
   linkRequestNyaa,
+  slashFAKE,
+  slashREDIRECT
 };
