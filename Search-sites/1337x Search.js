@@ -7,6 +7,7 @@ const fs = require("fs");
 const got = require("got");
 const changeLink = require("./search link request");
 const X1337_pre_link = "https://1337x.to";
+const redirect_link = "http://localhost:3001/1337x/redirect/"
 
 router.get("/:id", async (req, res) => {
   try {
@@ -39,12 +40,12 @@ router.get("/:id", async (req, res) => {
       let link_M = $(value).attr("href");
 
 
-
+      let fake_link = changeLink.slashFAKE( X1337_pre_link + link_M)
+    
+       redirect_link
     
 
-    
-
-      top_Magnet.push( changeLink.slashFAKE( X1337_pre_link + link_M));
+      top_Magnet.push( redirect_link +fake_link );
     });
 
     let top_Seeds = [];
