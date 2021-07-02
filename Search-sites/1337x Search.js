@@ -91,7 +91,7 @@ router.get("/:id", async (req, res) => {
 
     res.json(top_Movies_JSON);
   } catch (error) {
-    console.log(error);
+    console.log(error,"error");
   }
 });
 

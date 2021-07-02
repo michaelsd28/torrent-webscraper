@@ -32,10 +32,10 @@ cron.schedule("0 1 * * *", async () => {
   ).each((index, value) => {
     let link = "https://1337x.to" + `${$(value).attr("href")}`;
 
-    top_link.push(link);
+    top_link.push(  link);
   });
 
-  console.log(top_link);
+  console.log(top_link,"top_link");
 
 
 

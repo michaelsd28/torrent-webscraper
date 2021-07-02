@@ -79,9 +79,8 @@ router.get("/:id", async (req, res) => {
     });
 
 
-    let concat1 = top_type[1]
 
- console.log(concat1,"type[1]")
+
 
     const top_Movies_JSON = {
       movies: top_Titles,
@@ -94,7 +93,7 @@ router.get("/:id", async (req, res) => {
 
     res.json(top_Movies_JSON);
   } catch (error) {
-    console.log(error);
+    console.log(error,"error");
   }
 });
 
