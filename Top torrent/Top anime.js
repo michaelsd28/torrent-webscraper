@@ -5,7 +5,7 @@ const top_anime_url = "https://nyaa.si/?s=seeders&o=desc";
 const got = require("got");
 const cron = require("node-cron");
 const fs = require("fs");
-
+const date = new Date();
 
 
 cron.schedule("0 1 * * *", async () => {
@@ -65,6 +65,11 @@ cron.schedule("0 1 * * *", async () => {
   fs.writeFileSync(__dirname + "/z_Top anime.json", topAnimeFile, (err) => {
     if (err) throw err;
   });
+
+
+
+  console.log(`file updated on ${date}`)
+ 
 });
 
 router.get("/", async (req, res) => {

@@ -14,7 +14,7 @@ router.get("/:id", async (req, res) => {
 
     const html = await got(search_pirate);
     const $ = cheerio.load(html.body);
-
+      console.log(html.statusCode,"html.statusCode")
 
     /* search title */
 

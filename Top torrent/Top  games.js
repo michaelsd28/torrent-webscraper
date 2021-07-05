@@ -5,6 +5,7 @@ const top_games_url = "https://1337x.to/top-100-games";
 const cron = require("node-cron");
 const fs = require("fs");
 const got = require("got");
+const date = new Date();
 
 cron.schedule("0 1 * * *", async () => {
   const html = await got(top_games_url);
@@ -35,7 +36,7 @@ cron.schedule("0 1 * * *", async () => {
     top_link.push(  link);
   });
 
-  console.log(top_link,"top_link");
+
 
 
 
@@ -52,6 +53,8 @@ cron.schedule("0 1 * * *", async () => {
       if (err) throw err;
     }
   );
+console.log(`file updated on ${date}`)
+ 
 });
 
 router.get("/", async (req, res) => {

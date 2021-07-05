@@ -4,6 +4,7 @@ const request = require("request");
 const cron = require("node-cron");
 const app = express();
 const cors = require("cors");
+const date = new Date();
 
 app.use(cors());
 
@@ -29,6 +30,7 @@ app.use("/1337x/", X1337_search);
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/page.html");
+  console.log(date)
 });
 
 app.listen(3001, () => {

@@ -5,7 +5,7 @@ const top_movies_url = "https://thepiratebay10.org/browse/201/1/7/0";
 const cron = require("node-cron");
 const fs = require("fs");
 const got = require("got");
-
+const date = new Date();
 
 // cron.schedule("0 1 * * *", async () => {
 
@@ -56,6 +56,7 @@ const got = require("got");
   fs.writeFile(__dirname + "/z_Top Movies.json", topMOVIESfile, (err) => {
     if (err) throw err;
   });
+  console.log(`file updated on ${date}`)
 });
 
 
