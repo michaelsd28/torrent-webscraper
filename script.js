@@ -1,7 +1,7 @@
 const express = require("express");
 const cheerio = require("cheerio");
 const request = require("request");
-const cron = require("node-cron");
+const cron = require('node-schedule');
 const app = express();
 const cors = require("cors");
 const date = new Date();

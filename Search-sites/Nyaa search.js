@@ -3,7 +3,7 @@ const cheerio = require("cheerio");
 const router = express.Router();
 const nyaa_order = "&s=seeders&o=desc";
 const pirate_search = "https://nyaa.si/?f=0&c=0_0&q=";
-const cron = require("node-cron");
+const cron = require('node-schedule');
 const fs = require("fs");
 const got = require("got");
 const changeLink = require("./search link request");

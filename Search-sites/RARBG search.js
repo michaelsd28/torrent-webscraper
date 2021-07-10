@@ -3,7 +3,7 @@ const cheerio = require("cheerio");
 const router = express.Router();
 const pirate_search = "https://rarbgdata.org/torrents.php?search=";
 const search_order = "&order=seeders&by=DESC"
-const cron = require("node-cron");
+const cron = require('node-schedule');
 const fs = require("fs");
 const got = require("got");
 const changeLink = require("./search link request");

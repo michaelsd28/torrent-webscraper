@@ -3,7 +3,7 @@ const cheerio = require("cheerio");
 const router = express.Router();
 const top_shows_url = "https://thepiratebay10.org/top/205";
 const got = require("got");
-const cron = require("node-cron");
+const cron = require('node-schedule');
 const fs = require("fs");
 const date = new Date();
 
