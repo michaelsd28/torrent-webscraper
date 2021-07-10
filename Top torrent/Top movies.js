@@ -2,14 +2,16 @@ const express = require("express");
 const cheerio = require("cheerio");
 const router = express.Router();
 const top_movies_url = "https://thepiratebay10.org/browse/201/1/7/0";
-const cron = require("node-cron");
+const schedule = require('node-schedule');
 const fs = require("fs");
 const got = require("got");
 const date = new Date();
 
-// cron.schedule("0 1 * * *", async () => {
 
-  cron.schedule("0 1 * * *", async () => {
+//cron.scheduleJob("* * * * *", async () => {
+//cron.scheduleJob(" 0 1 * * *", async () => {
+
+  cron.scheduleJob(" 0 1 * * *", async () => {
   const html = await got(top_movies_url);
 
   const $ = cheerio.load(html.body);
@@ -56,7 +58,7 @@ const date = new Date();
   fs.writeFile(__dirname + "/z_Top Movies.json", topMOVIESfile, (err) => {
     if (err) throw err;
   });
-  console.log(`file updated on ${date}`)
+  console.log(`top movies file updated on ${date}`)
 });
 
 

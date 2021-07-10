@@ -7,9 +7,10 @@ const cron = require("node-cron");
 const fs = require("fs");
 const date = new Date();
 
+//cron.scheduleJob("* * * * *", async () => {
+//cron.scheduleJob(" 0 1 * * *", async () => {
 
-
-cron.schedule("0 1 * * *", async () => {
+  cron.scheduleJob(" 0 1 * * *", async () => {
 
 
   const html = await got(top_shows_url);
@@ -72,7 +73,7 @@ cron.schedule("0 1 * * *", async () => {
       fs.writeFileSync(__dirname+"/z_Top Shows.json", topMOVIESfile, (err) => {
         if (err) throw err;
       });
-      console.log(`file updated on ${date}`)
+      console.log(`top shows* file updated on ${date}`)
 
 
 });

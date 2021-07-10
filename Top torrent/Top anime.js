@@ -7,8 +7,11 @@ const cron = require("node-cron");
 const fs = require("fs");
 const date = new Date();
 
+//cron.scheduleJob("* * * * *", async () => {
+//cron.scheduleJob(" 0 1 * * *", async () => {
 
-cron.schedule("0 1 * * *", async () => {
+
+  cron.scheduleJob(" 0 1 * * *", async () => {
   const html = await got(top_anime_url);
   const $ = cheerio.load(html.body);
 
@@ -24,7 +27,7 @@ cron.schedule("0 1 * * *", async () => {
     }
   });
 
-  console.log(top_Titles, "top_Titles");
+
 
   /* top_magnet */
   let top_magnet = [];
@@ -68,7 +71,7 @@ cron.schedule("0 1 * * *", async () => {
 
 
 
-  console.log(`file updated on ${date}`)
+  console.log(`top anime file updated on ${date}`)
  
 });
 
