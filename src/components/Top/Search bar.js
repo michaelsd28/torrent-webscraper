@@ -62,7 +62,7 @@ function Search_bar() {
     options: myArr,
     open: openState,
     getOptionLabel: (option) => option,
-
+    
     onInputChange: (event, value, reason) => {
       try {
         setLoading(false);
