@@ -1,0 +1,167 @@
+.magnet-style {
+  height: 25px;
+  margin: 0 0 0 6px;
+}
+
+.magnet-style:hover {
+  transition: all ease-in-out 0.3s;
+  box-shadow: rgba(25, 197, 219, 0.562) 0px 19px 38px,
+    rgba(35, 166, 241, 0.5) 10px 3px 20px;
+  border-radius: 25px;
+}
+
+.input-filter:focus {
+  outline: none;
+}
+
+form input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.input-filter {
+  border: none;
+  margin: 25px;
+}
+
+.search-table-wrapper {
+  font-size: clamp(6px, 1vw, 15px);
+  max-width: 95vw;
+}
+
+.table-result img {
+  height: 25px;
+}
+
+#content
+  > div.container.table-result
+  > div.row.justify-content-center
+  > div
+  > div
+  > table
+  > tr:nth-child(1) {
+  pointer-events: none;
+}
+
+.filter-container img {
+  position: relative;
+  height: 20px;
+  pointer-events: none;
+  left: -55px;
+}
+
+.search-table-container {
+  border-radius: 12px;
+
+  padding: 50px;
+
+  color: rgb(228, 228, 228);
+  background-color: #2f4f75;
+
+  border: #323643 solid 5px;
+}
+#content
+  > div.container.table-result
+  > div.row.justify-content-center
+  > div
+  > div
+  > table
+  > tr:nth-child(n)
+  > td.table-seeds {
+  text-align: center;
+}
+#content
+  > div.container.table-result
+  > div.row.justify-content-center
+  > div
+  > div
+  > table
+  > tr:nth-child(n)
+  > td.magnet-search-table {
+  text-align: center;
+}
+
+#content
+  > div.container.table-result
+  > div.row.justify-content-center
+  > div
+  > div
+  > table
+  > tr:nth-child(1)
+  > th:nth-child(n) {
+  padding: 0 25px 0 25px;
+
+  margin: 0 25px 0 25px;
+}
+
+#content
+  > div.container.table-result
+  > div.row.justify-content-center
+  > div
+  > div
+  > table
+  > tr:nth-child(n)
+  > td.table-type {
+  /* padding: 0 55px 15px 0; */
+  padding-right: clamp(1px,80vw,38px);
+  font-size: clamp(7px,1vw,13px);
+  color: #a7bcb9;
+}
+
+#content
+  > div.container.table-result
+  > div.row.justify-content-center
+  > div
+  > div
+  > table
+  > tr:nth-child(1)
+  > th:nth-child(n) {
+  text-align: center;
+}
+
+#content
+  > div.container.table-result
+  > div.row.justify-content-center
+  > div
+  > div
+  > table
+  > tr:nth-child(1)
+  > th:nth-child(1) {
+  text-align: left;
+}
+
+.control-button *:focus {
+  outline: none !important;
+}
+
+.control-button{
+
+  /* border: red solid 5px; */
+
+  display: flex;
+
+  padding: 15px;
+}
+.title-td img{
+
+
+  height: clamp(15px,3vw,20px);
+
+
+}
+
+.search-table-wrapper img:hover{
+  border-radius: 25px;
+ box-shadow: #0299fdd0 0px 0px 25px;
+
+ transition: all ease-in-out 0.3s;
+}
+
+
+.Animation-lottie{
+
+display: flex;
+justify-content: center;
+
+height: 20vw;
+
+}

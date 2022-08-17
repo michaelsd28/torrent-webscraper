@@ -1,0 +1,70 @@
+[33m7b3df29[m[33m ([m[1;36mHEAD -> [m[1;32mno-css[m[33m)[m button
+[33m2d633c1[m[33m ([m[1;32mheroku[m[33m)[m heroku
+[33md86c5ee[m heroku
+[33maadbe8e[m[33m ([m[1;31morigin/localhost[m[33m, [m[1;32mlocalhost[m[33m)[m c
+[33m14c5878[m refresh
+[33m5750275[m changes
+[33mc8bbe6e[m[33m ([m[1;31morigin/deploy[m[33m)[m more responsive
+[33m6ae6070[m Revert "localhost fix"
+[33md9dd68d[m fix
+[33m1811724[m suggestion
+[33m7a84a19[m initial value
+[33m569e971[m fixed a bug
+[33mfb779fa[m modify local-storage
+[33md166a8a[m filter bug
+[33ma3fa0b2[m filter bug
+[33m1a01169[m localhost fix
+[33m3ecc9dd[m final one
+[33m2b6b8f3[m ip change
+[33m52ad7d6[m localstorage
+[33m6746f8a[m Torrent Bay
+[33m1db52b5[m favicon.ico
+[33mab7a452[m removed cached
+[33m38b586e[m Removing cached files
+[33m6a29123[m build added
+[33maca5c32[m changes
+[33m52beb96[m new changes
+[33m3709c8c[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m MORE RESPONSIVE
+[33m2d445a2[m styles
+[33m6fcf7d2[m css cleanup
+[33mb9f20a9[m added trash
+[33mf639d82[m ul fix
+[33mf1373e3[m[33m ([m[1;31mreact-torrent-website/master[m[33m)[m new syles
+[33m103f7da[m grid style added
+[33m8471f5e[m last today
+[33m3b02705[m little bug with filter
+[33m2692fca[m filter working
+[33mcb20fc7[m new input
+[33mc0e8f7e[m pending filter data
+[33mb6c8a46[m some fixes
+[33mba3adda[m change img
+[33m1e911e6[m data localStorage
+[33m41a6880[m yo soy un maldito capo
+[33m5582bcf[m i think i got input autocomplete
+[33ma940e0b[m did it but need to fix some bugs
+[33m1d77945[m close
+[33m9a662ee[m localstorage
+[33m68aaa99[m fixed null
+[33m73185c3[m fix
+[33m3fee27d[m input working 100%
+[33m35be4d4[m con honores
+[33m76db301[m border
+[33m86e5415[m fixed loading animation
+[33m64fdc9f[m working 1
+[33mf6a8d40[m working 1
+[33m560e295[m 1337x added
+[33m2989a0c[m added animation
+[33m7df041e[m nyaa search
+[33m8ed86af[m search json
+[33m556f987[m new page
+[33mb53e540[m changes
+[33m1ecf1a8[m style 2
+[33m39724c0[m style added 1
+[33ma0ca809[m changes
+[33m16d3b76[m working 3:43 am 07-jun-21
+[33m640e041[m working no bulto
+[33mbde54ca[m working 02:10 am
+[33mdc19691[m changes
+[33m16951bf[m skeleton 1
+[33mcb3090e[m changes
+[33me8d21ab[m Initialize project using Create React App
