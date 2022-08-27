@@ -1,0 +1,42 @@
+/* /Components/Body/Top torrent template.razor.rz.scp.css */
+body[b-61cgk1zxy6] {
+}
+
+
+/* /Components/Top/Main search/Autocomplete search.razor.rz.scp.css */
+.mudgrid-container[b-z7yu2zmhx8] {
+    border: solid 20px red;
+    min-width: 250px;
+}
+/* /Components/Top/Navbar.razor.rz.scp.css */
+
+
+
+
+@media only screen and (max-width: 990px) {
+    .search-icon-span-container[b-rfknqkzqgo] {
+
+    }
+
+    .search-button-container[b-rfknqkzqgo] {
+        padding: 10px;
+    }
+}
+/* /Components/Top/Search buttons/1333x.razor.rz.scp.css */
+h3[b-71s1o04q2h] {
+    color: white;
+}
+/* /Components/Top/Search buttons/Nyaa.razor.rz.scp.css */
+h3[b-31np66no31] {
+    color: white;
+}
+/* /Components/Top/Search buttons/Pirate search.razor.rz.scp.css */
+h3[b-uwt1e8h252] {
+
+    color:white;
+
+}
+/* /Components/Top/Search buttons/SearchButton Container.razor.rz.scp.css */
+
+
+
