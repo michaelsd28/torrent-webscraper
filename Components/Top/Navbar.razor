@@ -1,0 +1,60 @@
+﻿@using TorrentWebscrape_blazor.Service
+@using Torrent_Webscrape_blazor.Model
+@inject NavigationManager NavigationManager
+@inject StateContainer _StateContainer
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+
+<nav id="my-navbar" class="navbar navbar-expand-lg navbar-light bg-dark" >
+
+    <a class="navbar-brand"  href="/">
+    <img  class=" logo-image" style="margin-left:10px;" src="/Resources/Torrent webscrape logo.png" width="60" height="55" alt="">
+    </a>
+  <div style="position:relative;" @onkeydown="@KeyNavigation">
+
+            <TorrentWebscrape_blazor.Components.Top.Main_search.Autocomplete_search/>
+               </div>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span  class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+  <li  class="nav-item">
+
+      </li>
+
+             <TorrentWebscrape_blazor.Components.Top.Search_buttons.SearchButton_Container/>
+   
+    </ul>
+
+  </div>
+</nav>
+
+
+
+@code {
+
+
+
+
+    public async void KeyNavigation(KeyboardEventArgs args)
+    {
+
+        if (args.Key=="Enter" && _StateContainer.InputValueProperty !="" )
+        {
+
+
+            NavigationManager.NavigateTo($"/pirate-search/{_StateContainer.InputValueProperty}");
+
+           new TorrentServices().SaveInput(_StateContainer,localStorage);
+
+            
+        }
+
+
+    }
+
+
+}

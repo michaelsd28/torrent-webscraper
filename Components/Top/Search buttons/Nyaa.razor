@@ -1,0 +1,21 @@
+﻿
+<MudButton OnClick=@InvokeNavigation
+    Variant="Variant.Filled" 
+    StartIcon="@Icons.Material.Filled.ManageSearch" 
+    Style="background-color:#7e6fff; margin: 0 5px 0 5px;">
+    Nyaa
+</MudButton>
+
+@code {
+
+
+        [Parameter]
+    public Action<string> NavigationMethod { get; set; }
+
+    private void InvokeNavigation()
+{
+    NavigationMethod?.Invoke("nyaa-search");
+}
+
+
+}

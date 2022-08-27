@@ -1,0 +1,35 @@
+﻿@using Torrent_Webscrape_blazor.Model
+@inject StateContainer _StateContainer
+
+
+<div class="d-flex flex-column justify-content-center">
+
+<Top_header />
+    @if (_StateContainer.LoadingStateProperty)
+    {
+
+    <TorrentWebscrape_blazor.Components.Loading.Loading/>
+    
+    } else
+    {
+            <Top_Cards_container/>
+
+    }
+
+</div>
+@code {
+
+        protected override void OnInitialized()
+    {
+        _StateContainer.OnChange += StateHasChanged;
+    }
+
+
+
+    public void Dispose()
+    {
+        _StateContainer.OnChange -= StateHasChanged;
+    }
+
+
+}

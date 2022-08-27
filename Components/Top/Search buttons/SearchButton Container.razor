@@ -1,0 +1,50 @@
+﻿@using TorrentWebscrape_blazor.Service
+@using Torrent_Webscrape_blazor.Model
+@inject StateContainer _StateContainer
+@inject NavigationManager NavigationManager
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+
+<style>
+
+    @@media only screen and (max-width: 992px) {
+
+        .search-button-container{
+              width:92vw;
+        }
+  .search-button-subcontainer {
+      top:-15px;
+
+  }
+}
+
+</style>
+
+
+<div 
+    class="d-flex
+        align-middle
+        justify-content-lg-start
+        justify-content-xl-start
+        justify-content-center
+
+        search-button-container"
+    style="position:relative;flex-direction:row; height:80px;left:20px; ">
+
+<div class="search-button-subcontainer" style="position:absolute;margin:30px 0 0 0;  display:flex; ">
+
+    <Pirate_search NavigationMethod=@NavigateMethod />
+    <Nyaa NavigationMethod=@NavigateMethod />
+    <_1333x NavigationMethod=@NavigateMethod />
+
+</div>
+</div>
+@code {
+
+
+    public void NavigateMethod(string searchType){
+            NavigationManager.NavigateTo($"/{searchType}/{_StateContainer.InputValueProperty}");
+              new TorrentServices().SaveInput(_StateContainer,localStorage);
+    }
+
+
+}

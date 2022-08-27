@@ -1,0 +1,127 @@
+﻿@using TorrentWebscrape_blazor.Service
+@using Torrent_Webscrape_blazor.Model
+@inject IJSRuntime JSRuntime
+
+<!--  styles -->
+<style  >
+
+    thead{
+            white-space: nowrap;
+            text-transform: uppercase;
+    }
+
+    .row-container{
+    color:white;
+    
+    }
+
+        .row-container:hover{
+    color:whitesmoke !important;
+    
+    }
+    .list-top-torrent{
+    
+        content: counter(step-counter);
+    margin-right: 5px;
+    font-size: 80%;
+    background-color: #2772db;
+    color: #fff;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 3px;
+    }
+td{
+    
+    padding: 10px 5px 10px 5px ;
+    }
+
+    #movies-row {
+
+      border-radius:10px;
+
+        list-style: none;
+        margin: 0 20px 10px 20px;
+ background-color: #455d7a;
+ 
+  background-color: #455d7a;
+ 
+  border: #0d2242 solid 5px;
+
+  padding: 15px;
+  word-break: break-all;
+  max-width: 350PX;
+}
+
+</style>
+<!--  styles*-->
+
+<!--  html -->
+<div id="movies-row" class="movies-row  list-class  ">
+   <img style="max-height:80px;" src="@ImageLogo" alt="top-img">
+   <div class="col-md-auto top-torrent-row-format">
+      <table class="table table-hover table-borderless">
+         <thead>
+            <tr>
+               <th style="color: rgb(144, 224, 239);"> @TopName</th>
+               <th style="color: rgb(144, 224, 239);">Link</th>
+            </tr>
+         </thead>
+         <tbody>
+    
+            @foreach (var item in TorrentList)
+            {
+                            <tr>
+               <td class="row-container">
+                <small class="list-top-torrent">@item.Index</small> @item.Name
+               </td>
+               <td class="row-container">
+         
+                   <MudIconButton 
+                       OnClick="()=>OpenNewTab(item.Magnet)" 
+                       Style="position:relative; right:10px;" 
+                       Icon="@Icons.Filled.AddLink"
+                   >
+                   </MudIconButton>
+            
+  
+         
+            </td>
+            </tr>
+
+            }
+          
+         </tbody>
+      </table>
+   </div>
+</div>
+
+@code {
+
+
+    [Parameter]
+    public List<TopTorrent> TorrentList { get; set; } = new List<TopTorrent>();
+
+
+
+    [Parameter]
+    public string TopName { get; set; } = "";
+
+    [Parameter]
+    public string ImageLogo { get; set; } = "";
+
+
+        public async void OpenNewTab(string link) {
+
+        if (link.Contains("https://1337x.to/"))
+        {
+            link= await new TorrentServices().Get1337xMagnet(link);
+            Console.WriteLine("await new TorrentServices().Get1337xMagnet(link)");
+        }
+
+            Console.WriteLine("plain link");
+        await JSRuntime.InvokeAsync<object>("open",link,"_blank");
+    }
+
+
+
+}

@@ -1,0 +1,121 @@
+﻿@using MongoDB.Bson
+@using Torrent_Webscrape_blazor.Model
+@inject StateContainer _StateContainer
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+<style>
+
+
+ @@media only screen and (max-width: 991px) {
+  .mud-autocomplete {
+    width:300px;
+  }
+ }
+</style>
+
+
+      <MudAutocomplete 
+        FullWidth="@true"
+      Class="pa-4 mud-info-text mud-autocomplete" 
+      Style="@($"color:{Colors.Teal.Darken2}; width:350px; position:relative;top:-3px;")"
+      T="string" 
+      Label="Search torrent" 
+
+     
+      @bind-Value="_StateContainer.InputValueProperty" 
+      SearchFunc="@Search1"
+  
+  CoerceText="false"
+  CoerceValue="true"
+      AdornmentIcon="@Icons.Material.Filled.Search" 
+      AdornmentColor="Color.Info" 
+      Clearable="true"
+    Dense="true"
+    Immediate="true"
+
+  
+
+
+
+   @ref=@_elementReference
+ 
+
+
+      
+      >
+
+      <ItemTemplate  Context="e" >
+          <div  class="d-flex justify-space-between flex-grow-1 gap-4" >
+
+    <MudItem >@e</MudItem>
+
+<MudIconButton Size="Size.Small" @onclick="(() => DelSuggestions(e))" Class="absolute" Icon="@Icons.Material.Filled.Delete" aria-label="delete"/>
+         
+
+</div>
+
+      </ItemTemplate>
+      
+      </MudAutocomplete>
+
+
+@code {
+    private bool resetValueOnEmptyText;
+
+
+
+    private MudAutocomplete<string> _elementReference = new MudAutocomplete<string>();
+
+
+
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        _StateContainer.SuggestionListProperty = await localStorage.GetItemAsync<string[]>("_SuggestionList");
+
+    }
+
+
+    protected override void OnInitialized()
+    {
+        _StateContainer.OnChange += StateHasChanged;
+    }
+
+
+
+    public void Dispose()
+    {
+        _StateContainer.OnChange -= StateHasChanged;
+    }
+
+
+
+
+
+    private async void DelSuggestions(string e){
+
+
+
+        var list = _StateContainer.SuggestionListProperty.ToList();
+        list = list.FindAll(x=> x!= e);
+
+        await localStorage.SetItemAsync<List<string>>("_SuggestionList", list);
+        _StateContainer.SuggestionListProperty = list.ToArray();
+        _elementReference.Reset();
+         
+
+    }
+
+
+    private async Task<IEnumerable<string>> Search1(string value)
+    {
+
+
+        // if text is null or empty, show complete list
+        if (string.IsNullOrEmpty(value))
+            return _StateContainer.SuggestionListProperty;
+            return _StateContainer.SuggestionListProperty.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+    }
+
+}

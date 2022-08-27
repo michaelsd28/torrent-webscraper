@@ -1,0 +1,200 @@
+﻿@using System.Net.Http.Json
+@using TorrentWebscrape_blazor.Service
+@using Torrent_Webscrape_blazor.Model
+
+@inject StateContainer _StateContainer
+@inject IJSRuntime JSRuntime
+
+
+<style>
+
+    .mudtable-container-1 {
+    width:80vw;
+    background: rgb(23,30,37);
+    background: linear-gradient(90deg, rgba(23,30,37,1) 0%, rgba(28,42,56,1) 30%, rgba(20,47,74,1) 62%, rgba(16,26,36,1) 100%);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: auto;
+    border: solid 2px black;
+    border-radius:10px;
+}
+
+@@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+</style>
+
+@if (isLoading)
+{
+    <TorrentWebscrape_blazor.Components.Loading.Loading/>
+} else
+{
+    
+
+
+
+
+<div class="d-flex justify-content-center">
+<MudTable Items="@_StateContainer.TorrentTableListProperty" 
+    Class="mudtable-container-1"
+ 
+    Dense="@dense" Hover="@hover" Bordered="@bordered" Striped="@striped" 
+    Filter="new Func<TorrentTable,bool>(FilterFunc1)" @bind-SelectedItem="selectedItem1">
+
+    <ToolBarContent>
+        <MudText Typo="Typo.h6"><img src="/Resources/Table/table icon.png" width="35px"/> Torrents </MudText>
+        <MudSpacer />
+        <MudTextField @bind-Value="searchString1" 
+        Placeholder="Search" Adornment="Adornment.Start" 
+        AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0">
+    </MudTextField>
+    </ToolBarContent>
+
+    <HeaderContent>
+                <MudTh>Category</MudTh>
+              <MudTh>Name</MudTh>
+
+
+      <MudTh>Seed</MudTh>
+          <MudTh>Magnet</MudTh>
+    </HeaderContent>
+
+    <RowTemplate>
+          <MudTd DataLabel="Category">@context.type<br/>@context.subtype </MudTd>
+        <MudTd DataLabel="Name">@context.name<br/>@context.size</MudTd>
+      
+
+         <MudTd DataLabel="Seed">@context.seed</MudTd>
+        <MudTd DataLabel="Magnet"> 
+            <MudIconButton 
+                Variant="Variant.Filled"   
+                Icon="@Icons.Filled.AddLink" 
+            
+                Color="Color.Dark"
+                OnClick="()=>OpenNewTab(context.magnet)"
+            >
+
+            </MudIconButton> 
+            </MudTd>
+    </RowTemplate>
+
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+
+</MudTable>
+</div>
+
+<div class="d-flex justify-content-center flex-wrap mt-4">
+    <MudSwitch @bind-Checked="@hover" Color="Color.Primary">Hover</MudSwitch>
+    <MudSwitch @bind-Checked="@dense" Color="Color.Secondary">Dense</MudSwitch>
+    <MudSwitch @bind-Checked="@striped" Color="Color.Tertiary">Striped</MudSwitch>
+    <MudSwitch @bind-Checked="@bordered" Color="Color.Warning">Bordered</MudSwitch>
+
+
+</div>
+
+}
+
+
+@code {
+    private bool isLoading = false;
+    private bool dense = false;
+    private bool hover = true;
+    private bool striped = false;
+    private bool bordered = false;
+    private string searchString1 = "";
+    private TorrentTable selectedItem1 = null;
+    private HashSet<TorrentTable> selectedItems = new HashSet<TorrentTable>();
+
+
+
+    [Parameter]
+    public string SearchLocation { get; set; }
+
+    [Parameter]
+    public string SearchInput { get; set; }
+
+
+    public async void OpenNewTab(string link) {
+
+        if (link.Contains("/torrent/"))
+        {
+            link= await new TorrentServices().Get1337xMagnet("https://1337x.to"+link);
+
+         
+        }
+
+
+        await JSRuntime.InvokeAsync<object>("open",link,"_blank");
+    }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        try {
+            isLoading = true;
+            var newList  = await new TorrentTable_Scraper().GetTorrentList(SearchLocation,SearchInput);
+            _StateContainer.TorrentTableListProperty = newList;
+        } finally
+        {
+            isLoading = false;
+        }
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        try
+        {
+
+            isLoading = true;
+            var newList  = await new TorrentTable_Scraper().GetTorrentList(SearchLocation,SearchInput);
+            _StateContainer.TorrentTableListProperty = newList;
+
+
+        }
+        finally
+        {
+       
+
+            isLoading = false;
+
+        }
+
+
+    }
+
+
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        await base.SetParametersAsync(parameters);
+    }
+
+
+
+    private bool FilterFunc1(TorrentTable element) => FilterFunc(element, searchString1);
+
+    private bool FilterFunc(TorrentTable element, string searchString)
+    {
+        if (string.IsNullOrWhiteSpace(searchString))
+            return true;
+        if (element.name.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if (element.magnet.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+            return true;
+        if ($"{element.seed} {element.subtype} {element.type}".Contains(searchString))
+            return true;
+        return false;
+    }
+}

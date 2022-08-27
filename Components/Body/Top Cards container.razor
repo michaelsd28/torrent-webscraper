@@ -1,0 +1,65 @@
+﻿@using MongoDB.Bson
+@using TorrentWebscrape_blazor.Service;
+@using Torrent_Webscrape_blazor.Model;
+
+
+
+<div Class="d-flex flex-wrap justify-content-center"  >
+
+
+    @if(isLoading)
+    {
+        <TorrentWebscrape_blazor.Components.Loading.Loading/>
+
+    }
+    else
+    {
+
+
+                 <Top_torrent_template TopName="Top Movies"  ImageLogo="/Resources/Body/Top torrent/top movies.png" TorrentList=@movieList />
+                   <Top_torrent_template TopName="Top TV Shows" ImageLogo="/Resources/Body/Top torrent/top shows.png" TorrentList=tvshowsList/>
+        <Top_torrent_template TopName="Top Anime" ImageLogo="/Resources/Body/Top torrent/top anime.png" TorrentList=@animeList/>
+       
+      
+        <Top_torrent_template TopName="Top Games" ImageLogo="/Resources/Body/Top torrent/top games.png" TorrentList=@gameList/>
+    }
+
+
+
+
+
+
+</div>
+
+
+@code {
+    private bool isLoading = true;
+
+
+
+    List<TopTorrent> animeList = new List<TopTorrent>();
+    List<TopTorrent> movieList = new List<TopTorrent>();
+    List<TopTorrent> tvshowsList = new List<TopTorrent>();
+    List<TopTorrent> gameList = new List<TopTorrent>();
+
+    TopTorrent_Scraper scrape = new TopTorrent_Scraper();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try {
+  
+            animeList =  await new MongoDB_Services().GetTopTorrent("AnimeList");
+     movieList =  await new MongoDB_Services().GetTopTorrent("MovieList");
+    tvshowsList =  await new MongoDB_Services().GetTopTorrent("TVShowsList");
+     gameList =  await new MongoDB_Services().GetTopTorrent("GamesList");
+        } catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+
+        } finally
+        {
+            isLoading = false;
+        }
+    }
+
+}

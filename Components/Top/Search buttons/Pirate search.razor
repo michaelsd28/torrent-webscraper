@@ -1,0 +1,24 @@
+﻿
+
+<MudButton  OnClick="@InvokeNavigation"
+    Variant="Variant.Filled" 
+    StartIcon="@Icons.Material.Filled.ManageSearch" 
+    Style="background-color:gray; margin: 0 5px 0 5px;">
+    Pirate
+</MudButton>
+
+
+@code {
+
+    [Parameter]
+    public Action<string> NavigationMethod { get; set; }
+
+    private void InvokeNavigation()
+{
+    NavigationMethod?.Invoke("pirate-search");
+}
+
+
+
+
+}

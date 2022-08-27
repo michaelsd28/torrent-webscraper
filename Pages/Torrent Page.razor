@@ -1,0 +1,27 @@
+﻿@page "/{Location}/{searchTerm}"
+
+
+
+
+
+<PageTitle>Searched @searchTerm</PageTitle>
+<div style="margin:10vh 0 10vh 0">
+
+<TorrentWebscrape_blazor.Components.Torrent_table.Torrent_table  SearchLocation=@Location  SearchInput=@searchTerm/>
+</div>
+
+
+
+@code {
+    [Parameter]
+    public string Location { get; set; }
+
+
+    [Parameter]
+    public string searchTerm { get; set; }
+
+
+
+
+
+}
