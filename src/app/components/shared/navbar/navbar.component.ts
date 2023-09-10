@@ -105,17 +105,12 @@ export class NavbarComponent {
     // prevent closing dropdown when clicked
     event!.stopPropagation();
 
-
-   // close dropdown
-    // this.instance.dismissPopup();
-
-
 let tempSearchTerm = this.inputTerm;
-    let input = document.getElementById('inputTerm') as HTMLInputElement;
-    input.value = '';
-    input.focus();
+   // close dropdown
+   this.instance.dismissPopup();
 
-
+    // open dropdown
+    this.click$.next(tempSearchTerm);
 
 
 
