@@ -1,0 +1,37 @@
+<div class="container d-flex justify-content-center flex-column ">
+    <div class="col-12 position-relative ">
+
+        <div class="width-fit-content mt-5">
+            <p class="d-flex badge badge-pill bg-secondary fs-6">
+                Searched &nbsp;
+                <span class="text-danger">{{searchTerm}}</span>
+                &nbsp;
+                            in
+                            &nbsp;
+                            <span class="text-info">{{category}}</span>
+                            &nbsp; </p>
+        </div>
+
+
+    </div>
+    <div class="col-12 row ">
+        <div class="col-12">
+            <div class="card col-12 bg-dark text-white">
+                <div class="card-header">
+                    250 results found
+                </div>
+                <div class="card-body">
+                    <app-torrent-table></app-torrent-table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .width-fit-content {
+        width: fit-content;
+    }
+</style>
