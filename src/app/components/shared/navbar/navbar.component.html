@@ -27,7 +27,7 @@
                 </div>
             </ul>
 
-            <form class="d-flex" role="search">
+            <form (submit)="submitSearchTerm()" class="d-flex" role="search">
 
 
               <div class="input-group d-sm-flex d-none">
@@ -40,7 +40,7 @@
 
                 </div>
                 </ng-template>
-                    <input type="text"
+                    <input type="search"
                     id="inputTerm"
                     class="form-control"
                     placeholder="Search"
@@ -50,8 +50,8 @@
                     [resultTemplate]="typeHeadTemplate"
                     name="inputTerm"
                     #instance="ngbTypeahead"
-                    (focus)="focus$.next($any($event).target.value)"
-                    (click)="click$.next($any($event).target.value)"
+                    (focus)="openDropDown()"
+                    (click)="openDropDown()"
 
                     >
                     <button class="btn btn-outline-secondary p-0 m-0 pt-2 px-2" type="submit">

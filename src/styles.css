@@ -37,3 +37,6 @@ ngb-typeahead-window{
     word-wrap: break-word; /* Internet Explorer 5.5+ */
 
 }
+input[type=text]::-webkit-search-cancel-button {
+  -webkit-appearance: searchfield-cancel-button;
+}
